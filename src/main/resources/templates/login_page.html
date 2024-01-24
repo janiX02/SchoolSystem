@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>TwojaNauka.pl</title>
+        <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+        />
+        <link rel="stylesheet" type="text/css" href="css/mdb.min.css" />
+        <style>
+          .login-xxl {
+            margin-top: 170px;
+            width: 420px;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            padding-left: 35px;
+            padding-right: 35px;
+            text-align: center;
+          }
+        </style>
+      </head>
+<body>
+    <header>
+    <nav  style="z-index: 1;
+                min-height: 58.59px;"
+          class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <button
+            data-mdb-collapse-init
+            class="navbar-toggler"
+            type="button"
+            data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+        
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                <i class="fas fa-book-open">TwojaNauka.pl</i>
+            </a>
+          </div>
+        </div>
+      </nav>
+    
+      <div class="bg-image vh-100 justify-content-center" style="
+                                          margin-top: -58.59px;
+                                          background-image: url('https://wallpapercave.com/wp/wp2791405.jpg');">
+        
+      </div>
+    </header>
+    
+    <main>
+      <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.3)">
+        <div class="container login-xxl justify-content-center align-items-center rounded-6 bg-dark">
+          <form action="#" th:action="@{/authenticateTheUser}" method="post">
+            <h4 style="margin-bottom: 5%; color: #e3e3e3;">Zaloguj się</h4>
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="text" id="form1Example1" name="username" class="form-control" style="color: #e3e3e3;" />
+              <label class="form-label text-secondary" for="form1Example1">Adres e-mail</label>
+            </div>
+
+            <div class="form-outline mb-2" data-mdb-input-init>
+              <input type="password" id="form1Example2" name="password" class="form-control" style="color: #e3e3e3;" />
+              <label class="form-label text-secondary" for="form1Example2">Hasło</label>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col d-flex justify-content-center">
+              </div>
+            </div>
+            <div class="row mb-4 ms-1 me-1 align-items-center rounded-1 bg-danger" style="padding: 10px;" th:if="${param.error}">
+                <h7 style="color: #e3e3e3;">Wprowadzony adres e-mail lub hasło są niepoprawne!</h7>
+            </div>
+            <hr class="hr mb-4" style="background-color: rgb(94, 94, 94);";/>
+            <button type="submit" class="btn btn-primary btn-block" data-mdb-ripple-init>Zaloguj się</button>
+          </form>
+        </div>
+      </div>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="js/mdb.umd.min.js"> 
+      
+    </script>
+    <script type="text/javascript"></script>
+</body>
+</html>

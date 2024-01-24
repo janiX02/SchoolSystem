@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>TwojaNauka.pl</title>
+        <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+        />
+        <link rel="stylesheet" href="css/mdb.min.css" />
+      </head>
+<body>
+    <header>
+    <nav  style="z-index: 1000;
+                min-height: 58.59px;"
+          class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <button
+            data-mdb-collapse-init
+            class="navbar-toggler"
+            type="button"
+            data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+        
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <a class="navbar-brand mt-2 mt-lg-0" href="#" th:href="@{/redirectHome}">
+                <i class="fas fa-book-open">TwojaNauka.pl</i>
+            </a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link text-secondary" href="#" th:href="@{showInsertedGrades}">Oceny</a>
+              </li>
+              <li class="nav-item">
+                <div class="dropdown">
+                  <a
+                    data-mdb-dropdown-init
+                    class="dropdown-toggle d-flex align-items-center hidden-arrow nav-link"
+                    href="#"
+                    id="navbarDropdownMenuAvatar"
+                    role="button"
+                    aria-expanded="false"
+                    style="color: aliceblue;"
+                  >
+                  Uwagi
+                  </a>
+                  <ul
+                    class="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="navbarDropdownMenuAvatar"
+                  >
+                    <li class="nav-item">
+                      <a class="dropdown-item" href="#">Wystawione uwagi</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="dropdown-item" href="#" th:href="@{/addNote}">Dodaj uwagę</a>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_NAUCZYCIEL')">
+                <a class="nav-link text-secondary" href="#" th:href="@{/addEvent}">Dodaj Ogłoszenie</a>
+              </li>
+              <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                <div class="dropdown">
+                  <a
+                    data-mdb-dropdown-init
+                    class="dropdown-toggle d-flex align-items-center hidden-arrow nav-link text-secondary"
+                    href="#"
+                    id="navbarDropdownMenuAvatar"
+                    role="button"
+                    aria-expanded="false"
+                  >
+                  Zarządzaj
+                  </a>
+                  <ul
+                    class="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="navbarDropdownMenuAvatar"
+                  >
+                    <li class="nav-item">
+                      <a class="dropdown-item" href="#" th:href="@{/showAcceptanceRequests}">Prośby o rejestrację</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="dropdown-item" href="#" th:href="@{/addTeacher}">Utwórz nauczyciela</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="d-flex align-items-center">
+            <div class="dropdown">
+              <a
+                data-mdb-dropdown-init
+                class="text-reset me-3 dropdown-toggle hidden-arrow"
+                href="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                aria-expanded="false"
+              >
+              <i class="fas fa-comment text-secondary"></i>
+                <span class="badge rounded-pill badge-notification bg-danger"></span>
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+              <li>
+                <a class="dropdown-item" href="#" th:href="@{/addMessage}">Nowa wiadomość</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" th:href="@{/showReceivedMessages}">Wiadomości odebrane</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" th:href="@{/showSentMessages}">Wiadomości wysłane</a>
+              </li>
+              </ul>
+            </div>
+
+            <div class="dropdown">
+              <a
+                data-mdb-dropdown-init
+                class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                href="#"
+                id="navbarDropdownMenuAvatar"
+                role="button"
+                aria-expanded="false"
+              >
+              <i class="fas fa-user text-secondary"></i>
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdownMenuAvatar"
+              >
+                <li>
+                  <a class="dropdown-item" href="#">Moje dane</a>
+                </li>
+                <li>
+                  <form action="#" th:action="@{/logout}" method="post" class="logout-form">
+                  <input class="dropdown-item" type="submit" value="Wyloguj się" />
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="bg-image vh-100" style="
+                                          margin-top: -58.59px;
+                                          background-image: url('https://wallpapercave.com/wp/wp2791405.jpg');">
+        
+      </div>
+    </header>
+    <main>
+      <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.3)">
+        <div class="container-fluid vh-100 justify-content-center overflow-auto" style="background-color: rgb(224, 224, 224);">
+
+            <section class="">
+
+              <div th:if="${user.isCzyPosiadaUwagi()}">
+                <div class="row justify-content-center" style="margin-bottom: 10px; margin-top: 70px;">
+                  <div class="col-xl-6 col-lg-8 col-md-10">
+                    <div class="card-title" style="font-size: x-large; font-weight: 400;">
+                      Wystawione uwagi
+                    </div>
+                  </div>
+                </div>
+                <div class="row justify-content-center" style="margin-bottom: 30px;" th:each="note : ${notes}">
+                  <div class="col-xl-6 col-lg-8 col-md-10">
+                    <div class="card text-center">
+                      <div th:if="${note.rodzaj eq 'NEGATYWNA'}" class="card-header" style="background-color: rgb(255, 133, 131);">
+                        <div class="row">
+                          <p style="margin-bottom: 5px;">NEGATYWNA</p>
+                          <p style="margin-bottom: 5px;">
+                            Wystawiona dla: 
+                            <span th:text="${note.otrzymujacy.imie}"></span>
+                            <span th:text="${note.otrzymujacy.nazwisko}"></span>
+                          </p>
+                        </div>
+                      </div>
+                      <div th:if="${note.rodzaj eq 'POZYTYWNA'}" class="card-header" style="background-color: rgb(135, 255, 124);">
+                        <div class="row">
+                          <p style="margin-bottom: 5px;">POZYTYWNA</p>
+                          <p style="margin-bottom: 5px;">
+                            Wystawiona dla:
+                            <span th:text="${note.otrzymujacy.imie}"></span>
+                            <span th:text="${note.otrzymujacy.nazwisko}"></span>
+                          </p>
+                        </div>
+                      </div>
+                      <div class="card-body">
+                        <h5 class="card-title" th:text="${note.tytul}"></h5>
+                        <p class="card-text" style="text-align: justify;" th:text="${note.tresc}"></p>
+                        <a href="#" class="btn btn-primary" th:href="@{/updateNote(noteId=${note.id})}">Edytuj</a>
+                        <a href="#" class="btn btn-danger" th:href="@{/deleteNote(noteId=${note.id})}" onclick="if (!(confirm('Czy na pewno chcesz usunąć wybraną uwagę?'))) return false">Usuń</a>
+                      </div>
+                      <div class="card-footer text-muted">
+                        <span th:text="${note.getFormattedDate()}"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div th:unless="${user.isCzyPosiadaUwagi()}">
+                <div class="row justify-content-center" style="margin-bottom: 10px; margin-top: 70px;">
+                  <div class="col-xl-6 col-lg-8 col-md-10">
+                    <div class="card-title" style="font-size: x-large; font-weight: 400;">
+                      Brak wystawionych uwag
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+        </div>
+      </div>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="js/mdb.umd.min.js"></script>
+    <script type="text/javascript"></script>
+</body>
+</html>

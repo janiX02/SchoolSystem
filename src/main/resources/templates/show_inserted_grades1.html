@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>TwojaNauka.pl</title>
+        <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+        />
+        <link rel="stylesheet" href="css/mdb.min.css" />
+        <style>
+          th, td {
+    width: 14.28%; 
+    text-align: center; 
+  }
+  .bdr {border-radius: 6px;}
+        </style>
+      </head>
+<body>
+    <header>
+    <nav  style="z-index: 1000;
+                min-height: 58.59px;"
+          class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <button
+            data-mdb-collapse-init
+            class="navbar-toggler"
+            type="button"
+            data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <a class="navbar-brand mt-2 mt-lg-0" href="#" th:href="@{/redirectHome}">
+                <i class="fas fa-book-open">TwojaNauka.pl</i>
+            </a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item" sec:authorize="hasAnyRole('ROLE_UCZEN','ROLE_RODZIC')">
+                <a class="nav-link" href="#" th:href="@{/showGrades}" style="color: aliceblue;">Oceny</a>
+              </li>
+              <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_NAUCZYCIEL')">
+                <a class="nav-link" href="#" style="color: aliceblue;">Oceny</a>
+              </li>
+              <li class="nav-item" sec:authorize="hasAnyRole('ROLE_UCZEN','ROLE_RODZIC')">
+                <a class="nav-link text-secondary" th:href="@{/showNotes}" href="#">Uwagi</a>
+              </li>
+              <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_NAUCZYCIEL')">
+                <div class="dropdown">
+                  <a
+                    data-mdb-dropdown-init
+                    class="dropdown-toggle d-flex align-items-center hidden-arrow nav-link text-secondary"
+                    href="#"
+                    id="navbarDropdownMenuAvatar"
+                    role="button"
+                    aria-expanded="false"
+                  >
+                  Uwagi
+                  </a>
+                  <ul
+                    class="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="navbarDropdownMenuAvatar"
+                  >
+                    <li class="nav-item">
+                      <a class="dropdown-item" href="#" th:href="@{/showInsertedNotes}">Wystawione uwagi</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="dropdown-item" href="#" th:href="@{/addNote}">Dodaj uwagę</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_NAUCZYCIEL')">
+                <a class="nav-link text-secondary" href="#" th:href="@{/addEvent}">Dodaj Ogłoszenie</a>
+              </li>
+              <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                <div class="dropdown">
+                  <a
+                    data-mdb-dropdown-init
+                    class="dropdown-toggle d-flex align-items-center hidden-arrow nav-link text-secondary"
+                    href="#"
+                    id="navbarDropdownMenuAvatar"
+                    role="button"
+                    aria-expanded="false"
+                  >
+                  Zarządzaj
+                  </a>
+                  <ul
+                    class="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="navbarDropdownMenuAvatar"
+                  >
+                    <li class="nav-item">
+                      <a class="dropdown-item" href="#" th:href="@{/showAcceptanceRequests}">Prośby o rejestrację</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="dropdown-item" href="#" th:href="@{/addTeacher}">Utwórz nauczyciela</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="d-flex align-items-center">
+            <div class="dropdown">
+              <a
+                data-mdb-dropdown-init
+                class="text-reset me-3 dropdown-toggle hidden-arrow"
+                href="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                aria-expanded="false"
+              >
+              <i class="fas fa-comment text-secondary"></i>
+                <span class="badge rounded-pill badge-notification bg-danger"></span>
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+              <li>
+                <a class="dropdown-item" href="#" th:href="@{/addMessage}">Nowa wiadomość</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" th:href="@{/showReceivedMessages}">Wiadomości odebrane</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" th:href="@{/showSentMessages}">Wiadomości wysłane</a>
+              </li>
+              </ul>
+            </div>
+            <div class="dropdown">
+              <a
+                data-mdb-dropdown-init
+                class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                href="#"
+                id="navbarDropdownMenuAvatar"
+                role="button"
+                aria-expanded="false"
+              >
+              <i class="fas fa-user text-secondary"></i>
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdownMenuAvatar"
+              >
+                <li>
+                  <a class="dropdown-item" th:href="@{/showDetails}">Moje dane</a>
+                </li>
+                <li>
+                  <form action="#" th:action="@{/logout}" method="post" class="logout-form">
+                  <input class="dropdown-item" type="submit" value="Wyloguj się" />
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="bg-image vh-100" style="
+                                          margin-top: -58.59px;
+                                          background-image: url('https://wallpapercave.com/wp/wp2791405.jpg');">
+
+      </div>
+    </header>
+    <main>
+      <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.3)">
+        <div class="container-fluid vh-100 justify-content-center overflow-auto" style="background-color: rgb(224, 224, 224);">
+            <section class="">
+
+                <div class="row justify-content-center">
+                    <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-8 rounded-5 py-2 px-4" style="background-color: aliceblue; margin-top: 110px;">
+                        <div class="col">
+                            <h3 class="mt-3 mb-3" style="color: rgb(100, 100, 100); font-weight: 400;">Oceny</h3>
+                        </div>
+                        <div class="row mb-3">
+                          <div class="col-xxl-5 col-xl-6 col-lg-7 col-md-8 btn-group shadow-0">
+                            <span th:text="${student.toString()}">: <span th:text="${subject.nazwa}"></span></span>
+                          </div>
+                        </div>
+                        <div class="row mb-2" th:if="${student.isCzyPosiadaOceny()}">
+                          <span>Średnia ważona: <span th:text="${mean}"></span></span>
+                          <span>Proponowana ocena: <span th:text="${suggestedGrade}"></span></span>
+                        </div>
+                        <div class="row">
+                          <div class="col-2 me-4">
+                            <a class="btn btn-primary mb-3" href="#" th:href="@{/showInsertedGrades}">Wstecz</a>
+                          </div>
+                          <div class="col-2">
+                            <div class="dropdown">
+                              <button
+                              class="btn btn-success dropdown-toggle"
+                              type="button"
+                              data-mdb-dropdown-init
+                              data-mdb-ripple-init
+                              aria-expanded="false">
+                                Dodaj ocenę
+                              </button>
+                              <div class="dropdown-menu" style="width: 320px">
+                                <form class="px-4 py-3" th:object="${newGrade}" th:action="@{/addGrade}" method="post" id="myForm">
+                                  <input  type="hidden" th:field="*{uczen.id}"/>
+                                  <input  type="hidden" th:field="*{nauczyciel.id}"/>
+                                  <input  type="hidden" th:field="*{przedmiot.id}"/>
+                                  <input  type="hidden" th:field="*{sredniaWazona}"/>
+                                  <input  type="hidden" th:field="*{sugerowanaOcena}"/>
+                                  <span>Ocena</span>
+                                  <select class="form-select mb-3" name="ocena" th:field="*{wartosc}" style="width: 150px;">
+                                    <option th:value="6.0">6</option>
+                                    <option th:value="5.75">6-</option>
+                                    <option th:value="5.5">5+</option>
+                                    <option th:value="5.0">5</option>
+                                    <option th:value="4.75">5-</option>
+                                    <option th:value="4.5">4+</option>
+                                    <option th:value="4.0">4</option>
+                                    <option th:value="3.75">4-</option>
+                                    <option th:value="3.5">3+</option>
+                                    <option th:value="3.0">3</option>
+                                    <option th:value="2.75">3-</option>
+                                    <option th:value="2.5">2+</option>
+                                    <option th:value="2.0">2</option>
+                                    <option th:value="1.75">2-</option>
+                                    <option th:value="1.5">1+</option>
+                                    <option th:value="1">1</option>
+                                  </select>
+                                  <span>Waga oceny</span>
+                                  <select class="form-select mb-3" name="ocena" th:field="*{waga}" style="width: 150px;">
+                                    <option th:value="1">1</option>
+                                    <option th:value="2">2</option>
+                                    <option th:value="3">3</option>
+                                    <option th:value="4">4</option>
+                                    <option th:value="5">5</option>
+                                  </select>
+                                  <div class="form-outline mb-4" data-mdb-input-init>
+                                    <input type="text" id="form2Example2" th:field="*{etykieta}" class="form-control" />
+                                    <label class="form-label" for="form2Example2">Etykieta</label>
+                                  </div>
+                                  <button type="submit" class="btn btn-primary btn-block" data-mdb-ripple-init>Zapisz</button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>                        
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-5 justify-content-center"  th:if="${student.isCzyPosiadaOceny()}">
+                  <div class="col-xxl-9 col-xl-10">
+                    <table class="table table-bordered table-striped ">
+                      <thead class="table-dark">
+                        <tr>
+                          <th>Ocena</th>
+                          <th>Wartość do średniej</th>
+                          <th>Waga</th>
+                          <th>Etykieta</th>
+                          <th>Wpisana przez</th>
+                          <th>Data wpisania</th>
+                          <th>Działanie</th>
+                        </tr>
+                        
+                      </thead>
+                      <tbody>
+                        <tr th:each="grade : ${grades}">
+                          <th th:text="${grade.getOcena()}"></th>
+                          <th th:text="${grade.wartosc}"></th>
+                          <th th:text="${grade.waga}"></th>
+                          <th th:text="${grade.etykieta}"></th>
+                          <th th:text="${grade.nauczyciel.toString()}"></th>
+                          <th th:text="${grade.getFormattedDate()}"></th>
+                          <th>
+                            <div class="btn-group">
+                              <a class="btn btn-primary me-1" th:href="@{/updateGrade(gradeId=${grade.id})}">Edytuj</a>
+                              <a class="btn btn-danger" th:href="@{/deleteGrade(gradeId=${grade.id})}" onclick="if (!(confirm('Czy na pewno chcesz usunąć wybraną ocenę?'))) return false">Usuń</a> 
+                            </div>
+                          </th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="row mt-4 justify-content-center" th:unless="${student.isCzyPosiadaOceny()}">
+                  <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-8">
+                    <h3 style="font-weight: 400;">
+                      Brak ocen
+                    </h3>
+                  </div>
+                </div>
+            </section>
+        </div>
+      </div>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="js/mdb.umd.min.js"></script>
+    <script type="text/javascript"></script>
+    <script>
+      function submitForm() {
+          document.getElementById('myForm').submit();
+      }
+  </script>
+  <script>
+    $(document).ready(function(){
+      $("#dropdown").change(function(){
+        var selectedOption = $(this).val();
+        $(this).prepend($('option[value="' + selectedOption + '"]'));
+      });
+    });
+  </script>
+</body>
+</html>

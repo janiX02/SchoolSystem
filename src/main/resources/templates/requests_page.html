@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>TwojaNauka.pl</title>
+        <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+        />
+        <link rel="stylesheet" href="css/mdb.min.css" />
+        <style>
+          th, td {
+    width: 50%; 
+    text-align: center; 
+  }
+        </style>
+      </head>
+<body>
+    <header>
+
+    <nav  style="z-index: 1000;
+                min-height: 58.59px;"
+          class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <button
+            data-mdb-collapse-init
+            class="navbar-toggler"
+            type="button"
+            data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+        
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <a class="navbar-brand mt-2 mt-lg-0" href="#" th:href="@{/redirectHome}">
+                <i class="fas fa-book-open">TwojaNauka.pl</i>
+            </a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item" sec:authorize="hasAnyRole('ROLE_UCZEN','ROLE_RODZIC')">
+                <a class="nav-link text-secondary" href="#" th:href="@{/showGrades}">Oceny</a>
+              </li>
+              <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_NAUCZYCIEL')">
+                <a class="nav-link text-secondary" href="#" th:href="@{/showInsertedGrades}">Oceny</a>
+              </li>
+              <li class="nav-item" sec:authorize="hasAnyRole('ROLE_UCZEN','ROLE_RODZIC')">
+                <a class="nav-link text-secondary" th:href="@{/showNotes}" href="#">Uwagi</a>
+              </li>
+              <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_NAUCZYCIEL')">
+                <div class="dropdown">
+                  <a
+                    data-mdb-dropdown-init
+                    class="dropdown-toggle d-flex align-items-center hidden-arrow nav-link text-secondary"
+                    href="#"
+                    id="navbarDropdownMenuAvatar"
+                    role="button"
+                    aria-expanded="false"
+                  >
+                  Uwagi
+                  </a>
+                  <ul
+                    class="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="navbarDropdownMenuAvatar"
+                  >
+                    <li class="nav-item">
+                      <a class="dropdown-item" href="#" th:href="@{/showInsertedNotes}">Wystawione uwagi</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="dropdown-item" href="#" th:href="@{/addNote}">Dodaj uwagę</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li class="nav-item" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_NAUCZYCIEL')">
+                <a class="nav-link text-secondary" href="#" th:href="@{/addEvent}">Dodaj Ogłoszenie</a>
+              </li>
+              <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                <div class="dropdown">
+                  <a
+                    data-mdb-dropdown-init
+                    class="dropdown-toggle d-flex align-items-center hidden-arrow nav-link"
+                    href="#"
+                    id="navbarDropdownMenuAvatar"
+                    role="button"
+                    aria-expanded="false"
+                    style="color: aliceblue;"
+                  >
+                  Zarządzaj
+                  </a>
+                  <ul
+                    class="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="navbarDropdownMenuAvatar"
+                  >
+                    <li class="nav-item">
+                      <a class="dropdown-item" href="#" th:href="@{/showAcceptanceRequests}">Prośby o rejestrację</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="dropdown-item" href="#" th:href="@{/addTeacher}">Utwórz nauczyciela</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="d-flex align-items-center">
+            <div class="dropdown">
+              <a
+                data-mdb-dropdown-init
+                class="text-reset me-3 dropdown-toggle hidden-arrow"
+                href="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                aria-expanded="false"
+              >
+              <i class="fas fa-comment text-secondary"></i>
+                <span class="badge rounded-pill badge-notification bg-danger"></span>
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <li>
+                  <a class="dropdown-item" href="#" th:href="@{/addMessage}">Nowa wiadomość</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#" th:href="@{/showReceivedMessages}">Wiadomości odebrane</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#" th:href="@{/showSentMessages}">Wiadomości wysłane</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="dropdown">
+              <a
+                data-mdb-dropdown-init
+                class="dropdown-toggle d-flex align-items-center hidden-arrow"
+                href="#"
+                id="navbarDropdownMenuAvatar"
+                role="button"
+                aria-expanded="false"
+              >
+              <i class="fas fa-user text-secondary"></i>
+              </a>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="navbarDropdownMenuAvatar"
+              >
+                <li>
+                  <a class="dropdown-item" th:href="@{/showDetails}">Moje dane</a>
+                </li>
+                <li>
+                  <form action="#" th:action="@{/logout}" method="post" class="logout-form">
+                  <input class="dropdown-item" type="submit" value="Wyloguj się" />
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="bg-image vh-100" style="
+                                          margin-top: -58.59px;
+                                          background-image: url('https://wallpapercave.com/wp/wp2791405.jpg');">
+        
+      </div>
+    </header>
+    <main>
+      <div class="mask" style="background-color: hsla(0, 0%, 0%, 0.3)">
+        <div class="container-fluid vh-100 justify-content-center overflow-auto" style="background-color: rgb(224, 224, 224);">
+
+
+
+            <section class="">
+              
+              <div class="row justify-content-center" style="margin-top: 100px;">
+                <div class="col-xxl-5 col-xl-6 col-lg-7 col-md-8">
+                  <h3 style="font-weight: 400;">Oczekujący na zatwierdzenie</h3>
+                  <table class="table table-bordered table-striped ">
+                    <thead class="table-dark">
+                      <tr>
+                        <th>Uczeń</th>
+                        <th>Działanie</th>
+                      </tr>
+                      
+                    </thead>
+                    <tbody>
+                      <tr th:each="student : ${students}">
+                        <th style="text-align: center;" th:text="${student.toString()}"></th>
+                        <th style="align-items: center;">
+                          <div class="btn-group">
+                            <a class="btn btn-primary me-1" th:href="@{/confirmStudent(studentId=${student.id})}">Dodaj</a>
+                            <a class="btn btn-danger" th:href="@{/deleteStudent(studentId=${student.id})}" onclick="if (!(confirm('Czy na pewno chcesz usunąć ucznia?'))) return false">Usuń</a> 
+                          </div>
+                        </th>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
+            </section>
+
+        </div>
+      </div>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="js/mdb.umd.min.js"></script>
+    <script type="text/javascript"></script>
+</body>
+</html>

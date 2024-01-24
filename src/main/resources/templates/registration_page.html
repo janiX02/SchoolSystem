@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>TwojaNauka.pl</title>
+        <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+        />
+        <link rel="stylesheet" type="text/css" href="css/mdb.min.css" />
+        <style>
+          .login-xxl {
+            margin-top: 170px;
+            width: 420px;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            padding-left: 35px;
+            padding-right: 35px;
+            text-align: center;
+          }
+        </style>
+      </head>
+<body>
+    <header>
+    <nav  style="z-index: 1;
+                min-height: 58.59px;"
+          class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <button
+            data-mdb-collapse-init
+            class="navbar-toggler"
+            type="button"
+            data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+        
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <a class="navbar-brand mt-2 mt-lg-0" href="#">
+                <i class="fas fa-book-open">TwojaNauka.pl</i>
+            </a>
+          </div>
+        </div>
+      </nav>
+    
+      <div class="bg-image vh-100 justify-content-center" style="
+                                          margin-top: -58.59px;
+                                          background-image: url('https://wallpapercave.com/wp/wp2791405.jpg');">
+        
+      </div>
+    </header>
+    
+    <main>
+      <div class="mask overflow-auto" style="background-color: hsla(0, 0%, 0%, 0.3)" >
+        <div class="container login-xxl rounded-6 bg-dark" style="margin-top: 80px; padding-top: 30px; padding-bottom: 30px; margin-bottom: 30px;">
+            <h4 style="margin-bottom: 15px; color: #e3e3e3;">Rejestracja</h4>
+            <div class="row mb-4 ms-1 me-1 align-items-center rounded-1 bg-danger" style="padding: 10px;" th:if="${studentParent.isHasEmptyFields()}">
+              <h7 style="color: #e3e3e3;">Żadne z pól nie może pozostać puste!</h7>
+            </div>
+            <div class="row mb-4 ms-1 me-1 align-items-center rounded-1 bg-danger" style="padding: 10px;" th:if="${studentParent.isHasInvalidEmail()}">
+              <h7 style="color: #e3e3e3;">Wpisany adres email nie wygląda jak adres email!</h7>
+            </div>
+            <div class="row mb-4 ms-1 me-1 align-items-center rounded-1 bg-danger" style="padding: 10px;" th:if="${studentParent.isSameEmails()}">
+              <h7 style="color: #e3e3e3;">Adresy email ucznia i rodzica muszą być różne!</h7>
+            </div>
+            <div class="row mb-4 ms-1 me-1 align-items-center rounded-1 bg-danger" style="padding: 10px;" th:if="${studentParent.isSamePesel()}">
+              <h7 style="color: #e3e3e3;">Numery PESEL ucznia i rodzica muszą być różne!</h7>
+            </div>
+            <div class="row mb-4 ms-1 me-1 align-items-center rounded-1 bg-danger" style="padding: 10px;" th:if="${studentParent.isCorrectPesel()}">
+              <h7 style="color: #e3e3e3;">Niepoprawnie wprowadzony nr PESEL</h7>
+            </div>
+            <div class="row mb-4 ms-1 me-1 align-items-center rounded-1 bg-danger" style="padding: 10px;" th:if="${studentParent.isCorrectDate()}">
+              <h7 style="color: #e3e3e3;">Niepoprawnie wprowadzona data urodzenia!</h7>
+            </div>
+            <div class="row mb-4 ms-1 me-1 align-items-center rounded-1 bg-danger" style="padding: 10px;" th:unless="${studentParent.isGoodPassword()}">
+              <h7 style="color: #e3e3e3;">Hasło musi zawierać przynajmniej 6 znaków!</h7>
+            </div>
+            <hr class="hr" style="background-color: rgb(94, 94, 94);";/>
+          <form action="#" th:action="@{/registerTheUser}" th:object="${studentParent}" method="post">
+            <span><h4 class="text-start" style="color: #e3e3e3; font-weight: 300;">Dane ucznia</h4></span>
+
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="text" id="form1Example1" th:field="*{imieUcznia}" name="username" class="form-control" style="color: #e3e3e3;" />
+              <label class="form-label text-secondary" for="form1Example1">Imię</label>
+            </div>
+
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="text" id="form1Example1" th:field="*{nazwiskoUcznia}" name="username" class="form-control" style="color: #e3e3e3;" />
+              <label class="form-label text-secondary" for="form1Example1">Nazwisko</label>
+            </div>
+
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="text" id="form1Example1" th:field="*{peselUcznia}" name="username" class="form-control" style="color: #e3e3e3;" />
+              <label class="form-label text-secondary" for="form1Example1">Pesel</label>
+            </div>
+
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="text" id="form1Example1" th:field="*{dataUrodzeniaUcznia}" name="username" class="form-control" style="color: #e3e3e3;" />
+              <label class="form-label text-secondary" for="form1Example1">Data urodzenia (DD-MM-YYYY)</label>
+            </div>
+
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="text" id="form1Example1" th:field="*{emailUcznia}" name="username" class="form-control" style="color: #e3e3e3;" />
+              <label class="form-label text-secondary" for="form1Example1">Adres email</label>
+            </div>
+
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="password" id="form1Example1" th:field="*{hasloUcznia}" name="username" class="form-control" style="color: #e3e3e3;" />
+              <label class="form-label text-secondary" for="form1Example1">Hasło</label>
+            </div>
+            
+            <hr class="hr" style="background-color: rgb(94, 94, 94); margin-top: 40px;";/>
+
+            <span><h4 class="text-start" style="color: #e3e3e3; font-weight: 300;">Dane rodzica</h4></span>
+
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="text" id="form1Example1" th:field="*{imieRodzica}" name="username" class="form-control" style="color: #e3e3e3;" />
+              <label class="form-label text-secondary" for="form1Example1">Imię</label>
+            </div>
+
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="text" id="form1Example1" th:field="*{nazwiskoRodzica}" name="username" class="form-control" style="color: #e3e3e3;" />
+              <label class="form-label text-secondary" for="form1Example1">Nazwisko</label>
+            </div>
+
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="text" id="form1Example1" th:field="*{peselRodzica}" name="username" class="form-control" style="color: #e3e3e3;" />
+              <label class="form-label text-secondary" for="form1Example1">Pesel</label>
+            </div>
+
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="text" id="form1Example1" th:field="*{dataUrodzeniaRodzica}" name="username" class="form-control" style="color: #e3e3e3;" />
+              <label class="form-label text-secondary" for="form1Example1">Data urodzenia (DD-MM-YYYY)</label>
+            </div>
+
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="text" id="form1Example1" th:field="*{emailRodzica}" name="username" class="form-control" style="color: #e3e3e3;" />
+              <label class="form-label text-secondary" for="form1Example1">Adres email</label>
+            </div>
+
+            <div class="form-outline mb-4" data-mdb-input-init>
+              <input type="password" id="form1Example1" th:field="*{hasloRodzica}" name="username" class="form-control" style="color: #e3e3e3;" />
+              <label class="form-label text-secondary" for="form1Example1">Hasło</label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block"
+             data-mdb-ripple-init onclick="if (!(confirm('Upewnij się, że wszystkie dane zostały wprowadzone poprawnie!'))) return false">Zarejestruj się</button>
+          </form>
+        </div>
+      </div>
+    </main>
+    <footer>
+
+    </footer>
+    <script type="text/javascript" src="js/mdb.umd.min.js"> 
+      
+    </script>
+    <script type="text/javascript"></script>
+</body>
+</html>
